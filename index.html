@@ -141,14 +141,14 @@
 
                         
                         <li>
-                            <a href="/tags/">Tags</a>
+                            <a href="/archive/">Archives</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/archive/">Archives</a>
+                            <a href="/tags/">Tags</a>
                         </li>
                         
                     
@@ -211,22 +211,20 @@
 
 <div class="post-preview">
 
-    <a href="/article/基于廖雪峰Git教程笔记——Git简介/">
+    <a href="/article/基于廖雪峰Git教程笔记——分支管理/">
         <h2 class="post-title">
                                  
-            基于廖雪峰Git教程笔记——Git简介
+            基于廖雪峰Git教程笔记——分支管理
         </h2>
         <h3 class="post-subtitle">
-            
+            记叙Git一些分支管理操作，比较重要
         </h3>
         <div class="post-content-preview">
-            基于廖雪峰Git教程笔记——Git简介啥是Git？它的功能是啥？Git是目前世界上最先进的分布式版本控制系统（没有之一）。
-如果有一个软件，不但能自动帮我记录每次文件的改动，还可以让同事协作编辑，这样就不用自己管理一堆类似的文件了，也不需要把文件传来传去。如果想查看某次改动，只需要在软件里瞄一眼就可以，岂不是很方便？
+            创建与合并分支
+在版本回退里，你已经知道，每次提交，Git都把它们串成一条时间线，这条时间线就是一个分支。截止到目前，只有一条时间线，在Git里，这个分支叫主分支，即master分支。HEAD严格来说不是指向提交，而是指向master，master才是指向提交的，所以，HEAD指向的就是当前分支。
 
 
-这个软件用起来就应该像这个样子，能记录每次文件的改动：
-
-Git历史各......
+一开始的时候，master分支是一条线，Git用master指向最新的提交，再用HEAD指......
         </div>
     </a>
     
@@ -246,17 +244,21 @@ Git历史各......
 
 <div class="post-preview">
 
-    <a href="/article/hello-world/">
+    <a href="/article/基于廖雪峰Git教程笔记——远程仓库/">
         <h2 class="post-title">
                                  
-            Hello World
+            基于廖雪峰Git教程笔记——远程仓库
         </h2>
         <h3 class="post-subtitle">
-            
+            记叙Git一些对于远程仓库的连接、克隆、提交操作
         </h3>
         <div class="post-content-preview">
-            Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
-Qu......
+            第1步：创建SSH Key。在用户主目录下，看看有没有.ssh目录，如果有，再看看这个目录下有没有id_rsa和id_rsa.pub这两个文件，如果已经有了，可直接跳到下一步。如果没有，打开Shell（Windows下打开Git Bash），创建SSH Key：
+
+
+1$ ssh-keygen -t rsa -C "youremail@example.com"
+
+如果一切顺利的话，可以在用户......
         </div>
     </a>
     
@@ -265,6 +267,78 @@ Qu......
             2019-09-22
         </p>
         <div class="tags">
+            
+              <a href="/tags/#Git" title="Git">Git</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/article/基于廖雪峰Git教程笔记——时光机穿梭/">
+        <h2 class="post-title">
+                                 
+            基于廖雪峰Git教程笔记——时光机穿梭
+        </h2>
+        <h3 class="post-subtitle">
+            记叙一些有关于对文件的版本修改操作
+        </h3>
+        <div class="post-content-preview">
+            版本回退
+git status命令可以让我们时刻掌握仓库当前的状态，上面的命令输出告诉我们，readme.txt被修改过了，但还没有准备提交的修改。
+
+
+123456789$ git statusOn branch masterChanges not staged for commit:  (use "git add &lt;file&gt;..." to update what will ......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by 韦天魔术棒 on
+            2019-09-22
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#Git" title="Git">Git</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/article/基于廖雪峰Git教程笔记——Git简介/">
+        <h2 class="post-title">
+                                 
+            基于廖雪峰Git教程笔记——Git简介
+        </h2>
+        <h3 class="post-subtitle">
+            记叙Git一些基础说明和基础操作
+        </h3>
+        <div class="post-content-preview">
+            啥是Git？它的功能是啥？
+Git是目前世界上最先进的分布式版本控制系统（没有之一）。
+如果有一个软件，不但能自动帮我记录每次文件的改动，还可以让同事协作编辑，这样就不用自己管理一堆类似的文件了，也不需要把文件传来传去。如果想查看某次改动，只需要在软件里瞄一眼就可以，岂不是很方便？
+
+
+这个软件用起来就应该像这个样子，能记录每次文件的改动：
+
+Git历史
+各种大佬间的勾心斗角，没办法，利润就......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by 韦天魔术棒 on
+            2019-09-22
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#Git" title="Git">Git</a>
             
         </div>
     
@@ -276,13 +350,6 @@ Qu......
 
     <a href="/article/hexo-theme-huweihuang/">
         <h2 class="post-title">
-            
-                <i class="fa fa-thumb-tack" style="color:#F4711F" ></i>
-                <!-- <i class="fa fa-thumb-tack" style="color:#F89E8C" ></i> -->
-                <!-- <i class="fa fa-thumb-tack" style="color:#1CB7ED" ></i> -->
-                <font color=#F4711F>置顶</font>
-                <!-- <font color=#F89E8C>置顶</font>  -->
-                <!-- <font color=#1CB7ED>置顶</font>  -->
                                  
             [Hexo] Theme HuWeihuang
         </h2>
@@ -355,7 +422,7 @@ Install HexoInstall Node.js  and Git
             
         
             
-            <a href="/tags/#Git" title="Git" rel="1">Git</a>
+            <a href="/tags/#Git" title="Git" rel="4">Git</a>
             
         
     </div>
@@ -411,11 +478,19 @@ Install HexoInstall Node.js  and Git
     <ul>
       
         <li>
-          <a href="/article/基于廖雪峰Git教程笔记——Git简介/">基于廖雪峰Git教程笔记——Git简介</a>
+          <a href="/article/基于廖雪峰Git教程笔记——分支管理/">基于廖雪峰Git教程笔记——分支管理</a>
         </li>
       
         <li>
-          <a href="/article/hello-world/">Hello World</a>
+          <a href="/article/基于廖雪峰Git教程笔记——远程仓库/">基于廖雪峰Git教程笔记——远程仓库</a>
+        </li>
+      
+        <li>
+          <a href="/article/基于廖雪峰Git教程笔记——时光机穿梭/">基于廖雪峰Git教程笔记——时光机穿梭</a>
+        </li>
+      
+        <li>
+          <a href="/article/基于廖雪峰Git教程笔记——Git简介/">基于廖雪峰Git教程笔记——Git简介</a>
         </li>
       
         <li>
@@ -430,7 +505,7 @@ Install HexoInstall Node.js  and Git
         
     <h5>ARCHIVES</h5>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a><span class="archive-list-count">1</span></li></ul>
     </div>
 
         <hr>
