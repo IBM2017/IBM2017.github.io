@@ -14,11 +14,11 @@
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <title>
         
-          基于廖雪峰Git教程笔记——Git简介 - 韦天魔术棒 | Blog
+          JVM基础概念 - 韦天魔术棒 | Blog
         
     </title>
 
-    <link rel="canonical" href="https://ibm2017.github.io/article/基于廖雪峰Git教程笔记——Git简介/">
+    <link rel="canonical" href="https://ibm2017.github.io/article/JVM基础概念/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -88,11 +88,11 @@
                     <div class="post-heading">
                         <div class="tags">
                             
-                              <a class="tag" href="/tags/#Git" title="Git">Git</a>
+                              <a class="tag" href="/tags/#JVM" title="JVM">JVM</a>
                             
                         </div>
-                        <h1>基于廖雪峰Git教程笔记——Git简介</h1>
-                        <h2 class="subheading">记叙Git一些基础说明和基础操作</h2>
+                        <h1>JVM基础概念</h1>
+                        <h2 class="subheading">基于JAVA核心知识点对JVM概念笔记</h2>
                         <span class="meta">
                             Posted by 韦天魔术棒 on
                             2019-09-22
@@ -212,52 +212,40 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <h1 id="啥是Git？它的功能是啥？"><a href="#啥是Git？它的功能是啥？" class="headerlink" title="啥是Git？它的功能是啥？"></a>啥是Git？它的功能是啥？</h1><hr>
-<p>Git是目前世界上最先进的分布式版本控制系统（没有之一）。</p>
-<p>如果有一个软件，不但能自动帮我记录每次文件的改动，还可以让同事协作编辑，这样就不用自己管理一堆类似的文件了，也不需要把文件传来传去。如果想查看某次改动，只需要在软件里瞄一眼就可以，岂不是很方便？</p>
+                <h1 id="JVM简介"><a href="#JVM简介" class="headerlink" title="JVM简介"></a>JVM简介</h1><h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><hr>
+<p>JVM 是可运行 Java 代码的假想计算机 ，包括一套字节码指令集、一组寄存器、一个栈、<br>一个垃圾回收，堆 和 一个存储方法域。JVM 是运行在操作系统之上的，它与硬件没有直接<br>的交互。</p>
 <a id="more"></a>
 
-<p>这个软件用起来就应该像这个样子，能记录每次文件的改动：</p>
-<p><img src="//ibm2017.github.io/article/基于廖雪峰Git教程笔记——Git简介/%E6%90%9C%E7%8B%97%E6%88%AA%E5%9B%BE20190920171305.png" alt="搜狗截图20190920171305"></p>
-<h1 id="Git历史"><a href="#Git历史" class="headerlink" title="Git历史"></a>Git历史</h1><hr>
-<p>各种大佬间的勾心斗角，没办法，利润就是一切，要不然哪来的贩毒走私</p>
-<h1 id="集中式、分布式简介及优缺点"><a href="#集中式、分布式简介及优缺点" class="headerlink" title="集中式、分布式简介及优缺点"></a>集中式、分布式简介及优缺点</h1><hr>
-<p>集中式版本控制系统，版本库是集中存放在中央服务器的，而干活的时候，用的都是自己的电脑，所以要先从中央服务器取得最新的版本，然后开始干活，干完活了，再把自己的活推送给中央服务器。中央服务器就好比是一个图书馆，你要改一本书，必须先从图书馆借出来，然后回到家自己改，改完了，再放回图书馆。</p>
-<p>缺点：必须联网才能工作，如果在局域网内还好，带宽够大，速度够快，可如果在互联网上，遇到网速慢的话，可能提交一个10M的文件就需要5分钟，这还不得把人给憋死啊。</p>
-<p>分布式版本控制系统根本没有“中央服务器”，每个人的电脑上都是一个完整的版本库，这样，你工作的时候，就不需要联网了，因为版本库就在你自己的电脑上。既然每个人电脑上都有一个完整的版本库，那多个人如何协作呢？比方说你在自己电脑上改了文件A，你的同事也在他的电脑上改了文件A，这时，你们俩之间只需把各自的修改推送给对方，就可以互相看到对方的修改了。</p>
-<p>优点：分布式版本控制系统的安全性要高很多，因为每个人电脑里都有完整的版本库，某一个人的电脑坏掉了不要紧，随便从其他人那里复制一个就可以了。而集中式版本控制系统的中央服务器要是出了问题，所有人都没法干活了。</p>
-<h1 id="在Windows上安装Git"><a href="#在Windows上安装Git" class="headerlink" title="在Windows上安装Git"></a>在Windows上安装Git</h1><hr>
-<p>官网下载安装安装包，直接下一步默认安装。</p>
-<p>安装完后要开始配置账户：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> git config --global user.name "Your Name"</span><br><span class="line"><span class="meta">$</span> git config --global user.email "email@example.com"</span><br></pre></td></tr></table></figure>
+<p><img src="//ibm2017.github.io/article/JVM基础概念/%E6%90%9C%E7%8B%97%E6%88%AA%E5%9B%BE20190922155719.png" alt></p>
+<h2 id="运行过程"><a href="#运行过程" class="headerlink" title="运行过程"></a>运行过程</h2><hr>
+<p>① Java 源文件—-&gt;编译器—-&gt;字节码文件（.class）</p>
+<p>② 字节码文件—-&gt;JVM—-&gt;机器码</p>
+<p>虽然平台的解释器不同，但实现代码的虚拟机都相同，所以Java能实现跨平台的原因。</p>
+<p><img src="//ibm2017.github.io/article/JVM基础概念/%E6%90%9C%E7%8B%97%E6%88%AA%E5%9B%BE20190922160612.png" alt></p>
+<h1 id="线程"><a href="#线程" class="headerlink" title="线程"></a>线程</h1><hr>
+<p>JVM 允许一个应用并发执行多个线程。Hotspot JVM 中的 Java 线程与原生操作系统线程有直接的映射关系。当线程本地存储、缓冲区分配、同步对象、栈、程序计数器等准备好以后，就会创建一个操作系统原生线程。Java 线程结束，原生线程随之被回收。操作系统负责调度所有线程，并把它们分配到任何可用的 CPU 上。当原生线程初始化完毕，就会调用 Java 线程的 run() 方法。当线程结束时，会释放原生线程和 Java 线程的所有资源。</p>
+<p>Hotspot JVM 后台运行的系统线程主要有下面几个：</p>
+<p><img src="//ibm2017.github.io/article/JVM基础概念/%E6%90%9C%E7%8B%97%E6%88%AA%E5%9B%BE20190922161215.png" alt></p>
+<h1 id="JVM内存区域"><a href="#JVM内存区域" class="headerlink" title="JVM内存区域"></a>JVM内存区域</h1><hr>
+<p><img src="//ibm2017.github.io/article/JVM基础概念/%E6%90%9C%E7%8B%97%E6%88%AA%E5%9B%BE20190922162055.png" alt></p>
+<p>线程私有数据区域生命周期与线程相同, 依赖用户线程的启动/结束 而 创建/销毁(在 Hotspot VM 内, 每个线程都与操作系统的本地线程直接映射, 因此这部分内存区域的存/否跟随本地线程的生/死对应)。</p>
+<p>线程共享区域随虚拟机的启动/关闭而创建/销毁。</p>
+<p>直接内存并不是 JVM 运行时数据区的一部分, 但也会被频繁的使用: 在 JDK 1.4 引入的 NIO 提供了基于 Channel 与 Buffer 的 IO 方式, 它可以使用 Native 函数库直接分配堆外内存, 然后使用DirectByteBuffer 对象作为这块内存的引用进行操作(详见: Java I/O 扩展), 这样就避免了在 Java堆和 Native 堆中来回复制数据, 因此在一些场景中可以显著提高性能。</p>
+<p><img src="//ibm2017.github.io/article/JVM基础概念/%E6%90%9C%E7%8B%97%E6%88%AA%E5%9B%BE20190922170433.png" alt></p>
+<h2 id="程序计数器（线程私有）"><a href="#程序计数器（线程私有）" class="headerlink" title="程序计数器（线程私有）"></a>程序计数器（线程私有）</h2><hr>
+<p>一块较小的内存空间, 是当前线程所执行的字节码的行号指示器，每条线程都要有一个独立的程序计数器，这类内存也称为“线程私有”的内存。</p>
+<p>正在执行 java 方法的话，计数器记录的是虚拟机字节码指令的地址（当前指令的地址）。如果还是 Native 方法，则为空。</p>
+<p>这个内存区域是唯一一个在虚拟机中没有规定任何 OutOfMemoryError 情况的区域。</p>
+<h2 id="虚拟机栈-线程私有"><a href="#虚拟机栈-线程私有" class="headerlink" title="虚拟机栈(线程私有)"></a>虚拟机栈(线程私有)</h2><hr>
+<p>是描述java方法执行的内存模型，每个方法在执行的同时都会创建一个栈帧（Stack Frame）用于存储局部变量表、操作数栈、动态链接、方法出口等信息。每一个方法从调用直至执行完成的过程，就对应着一个栈帧在虚拟机栈中入栈到出栈的过程。</p>
+<p>栈帧（ Frame）是用来存储数据和部分过程结果的数据结构，同时也被用来处理动态链接<br>(Dynamic Linking)、 方法返回值和异常分派（ Dispatch Exception）。栈帧随着方法调用而创建，随着方法结束而销毁——无论方法是正常完成还是异常完成（抛出了在方法内未被捕获的异常）都算作方法结束。</p>
+<h2 id="本地方法区-线程私有"><a href="#本地方法区-线程私有" class="headerlink" title="本地方法区(线程私有)"></a>本地方法区(线程私有)</h2><hr>
+<p>任何本地方法接口都会使用某种本地方法栈。当线程调用Java方法时，虚拟机会创建一个新的栈帧并压入Java栈。然而当它调用的是本地方法时，虚拟机会保持Java栈不变，不再在线程的Java栈中压入新的帧，虚拟机只是简单地动态连接并直接调用指定的本地方法。</p>
+<h2 id="堆（Heap-线程共享）-运行时数据区"><a href="#堆（Heap-线程共享）-运行时数据区" class="headerlink" title="堆（Heap-线程共享）-运行时数据区"></a>堆（Heap-线程共享）-运行时数据区</h2><hr>
+<p>是被线程共享的一块内存区域，创建的对象和数组都保存在 Java 堆内存中，也是垃圾收集器进行垃圾收集的最重要的内存区域。由于现代 VM 采用分代收集算法, 因此 Java 堆从 GC 的角度还可以细分为: 新生代(Eden 区、From Survivor 区和 To Survivor 区)和老年代。</p>
+<h2 id="方法区-永久代（线程共享）"><a href="#方法区-永久代（线程共享）" class="headerlink" title="方法区/永久代（线程共享）"></a>方法区/永久代（线程共享）</h2><hr>
+<p>即我们常说的永久代(Permanent Generation), 用于存储被 JVM 加载的类信息、常量、静态变量、即时编译器编译后的代码等数据. HotSpot VM把GC分代收集扩展至方法区, 即使用Java堆的永久代来实现方法区, 这样 HotSpot 的垃圾收集器就可以像管理 Java 堆一样管理这部分内存,而不必为方法区开发专门的内存管理器(永久带的内存回收的主要目标是针对常量池的回收和类型的卸载, 因此收益一般很小)。<br>运行时常量池（Runtime Constant Pool）是方法区的一部分。Class 文件中除了有类的版本、字段、方法、接口等描述等信息外，还有一项信息是常量池（Constant Pool Table），用于存放编译期生成的各种字面量和符号引用，这部分内容将在类加载后存放到方法区的运行时常量池中。 Java 虚拟机对 Class 文件的每一部分（自然也包括常量池）的格式都有严格的规定，每一个字节用于存储哪种数据都必须符合规范上的要求，这样才会被虚拟机认可、装载和执行。</p>
 
-<p>注意<code>git config</code>命令的<code>--global</code>参数，用了这个参数，表示你这台机器上所有的Git仓库都会使用这个配置，当然也可以对某个仓库指定不同的用户名和Email地址。</p>
-<h1 id="创建版本库"><a href="#创建版本库" class="headerlink" title="创建版本库"></a>创建版本库</h1><hr>
-<p>版本库又名仓库，英文名<strong>repository</strong>，你可以简单理解成一个目录，这个目录里面的所有文件都可以被Git管理起来，每个文件的修改、删除，Git都能跟踪，以便任何时刻都可以追踪历史，或者在将来某个时刻可以“还原”。</p>
-<p>首先，选择一个合适的地方，创建一个空目录：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> mkdir learngit</span><br><span class="line"><span class="meta">$</span> cd learngit</span><br><span class="line"><span class="meta">$</span> pwd</span><br><span class="line">/Users/michael/learngit</span><br></pre></td></tr></table></figure>
-
-<p><code>pwd</code>命令用于显示当前目录。如果你使用Windows系统，为了避免遇到各种莫名其妙的问题，请确保目录名（包括父目录）不包含中文。</p>
-<p>第二步，通过<code>git init</code>命令把这个目录变成Git可以管理的仓库：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> git init</span><br><span class="line">Initialized empty Git repository in /Users/michael/learngit/.git/</span><br></pre></td></tr></table></figure>
-
-<h1 id="把文件添加到版本库"><a href="#把文件添加到版本库" class="headerlink" title="把文件添加到版本库"></a>把文件添加到版本库</h1><hr>
-<p>使用Windows的童鞋要特别注意：</p>
-<p>千万不要使用Windows自带的<strong>记事本</strong>编辑任何文本文件。原因是Microsoft开发记事本的团队使用了一个非常弱智的行为来保存UTF-8编码的文件，他们自作聪明地在每个文件开头添加了0xefbbbf（十六进制）的字符，你会遇到很多不可思议的问题，比如，网页第一行可能会显示一个“?”，明明正确的程序一编译就报语法错误，等等，都是由记事本的弱智行为带来的。</p>
-<p>言归正传，现在我们编写一个<code>readme.txt</code>文件，内容如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Git is a version control system.</span><br><span class="line">Git is free software.</span><br></pre></td></tr></table></figure>
-
-<p>一定要放到<code>learngit</code>目录下（子目录也行），因为这是一个Git仓库，放到其他地方Git再厉害也找不到这个文件。</p>
-<p>第一步，用命令<code>git add</code>告诉Git，把文件添加到仓库：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> git add readme.txt</span><br></pre></td></tr></table></figure>
-
-<p>第二步，用命令<code>git commit</code>告诉Git，把文件提交到仓库：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> git commit -m "wrote a readme file"</span><br><span class="line">[master (root-commit) eaadf4e] wrote a readme file</span><br><span class="line"> 1 file changed, 2 insertions(+)</span><br><span class="line"> create mode 100644 readme.txt</span><br></pre></td></tr></table></figure>
-
-<p>简单解释一下<code>git commit</code>命令，<code>-m</code>后面输入的是本次提交的说明，可以输入任意内容。</p>
-<p><code>git commit</code>命令执行成功后会告诉你，<code>1 file changed</code>：1个文件被改动（我们新添加的readme.txt文件）；<code>2 insertions</code>：插入了两行内容（readme.txt有两行内容）。</p>
-<p>为什么Git添加文件需要<code>add</code>，<code>commit</code>一共两步呢？因为<code>commit</code>可以一次提交很多文件，所以你可以多次<code>add</code>不同的文件，比如：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> git add file1.txt</span><br><span class="line"><span class="meta">$</span> git add file2.txt file3.txt</span><br><span class="line"><span class="meta">$</span> git commit -m "add 3 files."</span><br></pre></td></tr></table></figure>
                 
 
                 <hr>
@@ -265,12 +253,12 @@
                 <ul class="pager">
                     
                         <li class="previous">
-                            <a href="/article/基于廖雪峰Git教程笔记——时光机穿梭/" data-toggle="tooltip" data-placement="top" title="基于廖雪峰Git教程笔记——时光机穿梭">&larr; Previous Post</a>
+                            <a href="/article/JVM运行时内存/" data-toggle="tooltip" data-placement="top" title="JVM运行时内存">&larr; Previous Post</a>
                         </li>
                     
                     
                         <li class="next">
-                            <a href="/article/hexo-theme-huweihuang/" data-toggle="tooltip" data-placement="top" title="[Hexo] Theme HuWeihuang">Next Post &rarr;</a>
+                            <a href="/article/基于廖雪峰Git教程笔记——分支管理/" data-toggle="tooltip" data-placement="top" title="基于廖雪峰Git教程笔记——分支管理">Next Post &rarr;</a>
                         </li>
                     
                 </ul>
@@ -320,7 +308,7 @@
         <div id="toc" class="toc-article">
         <strong class="toc-title">Contents</strong>
         
-          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#啥是Git？它的功能是啥？"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">啥是Git？它的功能是啥？</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#Git历史"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">Git历史</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#集中式、分布式简介及优缺点"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">集中式、分布式简介及优缺点</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#在Windows上安装Git"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">在Windows上安装Git</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#创建版本库"><span class="toc-nav-number">5.</span> <span class="toc-nav-text">创建版本库</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#把文件添加到版本库"><span class="toc-nav-number">6.</span> <span class="toc-nav-text">把文件添加到版本库</span></a></li></ol>
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#JVM简介"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">JVM简介</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#基本概念"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">基本概念</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#运行过程"><span class="toc-nav-number">1.2.</span> <span class="toc-nav-text">运行过程</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#线程"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">线程</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#JVM内存区域"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">JVM内存区域</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#程序计数器（线程私有）"><span class="toc-nav-number">3.1.</span> <span class="toc-nav-text">程序计数器（线程私有）</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#虚拟机栈-线程私有"><span class="toc-nav-number">3.2.</span> <span class="toc-nav-text">虚拟机栈(线程私有)</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#本地方法区-线程私有"><span class="toc-nav-number">3.3.</span> <span class="toc-nav-text">本地方法区(线程私有)</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#堆（Heap-线程共享）-运行时数据区"><span class="toc-nav-number">3.4.</span> <span class="toc-nav-text">堆（Heap-线程共享）-运行时数据区</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#方法区-永久代（线程共享）"><span class="toc-nav-number">3.5.</span> <span class="toc-nav-text">方法区/永久代（线程共享）</span></a></li></ol></li></ol>
         
         </div>
       </aside>
@@ -340,7 +328,7 @@
                     <h5><a href="/tags/">FEATURED TAGS</a></h5>
                     <div class="tags">
                        
-                          <a class="tag" href="/tags/#Git" title="Git">Git</a>
+                          <a class="tag" href="/tags/#JVM" title="JVM">JVM</a>
                         
                     </div>
                 </section>
