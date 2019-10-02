@@ -14,11 +14,11 @@
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <title>
         
-          JVM运行时内存 - 韦天魔术棒 | Blog
+          MySQL约束课堂笔记 - 韦天魔术棒 | Blog
         
     </title>
 
-    <link rel="canonical" href="https://ibm2017.github.io/article/JVM运行时内存/">
+    <link rel="canonical" href="https://ibm2017.github.io/article/MySQL约束课堂笔记/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -88,14 +88,14 @@
                     <div class="post-heading">
                         <div class="tags">
                             
-                              <a class="tag" href="/tags/#JVM" title="JVM">JVM</a>
+                              <a class="tag" href="/tags/#MySQL" title="MySQL">MySQL</a>
                             
                         </div>
-                        <h1>JVM运行时内存</h1>
-                        <h2 class="subheading">基于JAVA核心知识点对JVM运行时内存中的新生代、老年代和永久代介绍</h2>
+                        <h1>MySQL约束课堂笔记</h1>
+                        <h2 class="subheading">记叙了DQL:查询语句、约束、多表之间的关系、范式、数据库的备份和还原</h2>
                         <span class="meta">
                             Posted by 韦天魔术棒 on
-                            2019-09-22
+                            2019-10-02
                         </span>
                     </div>
                 
@@ -212,43 +212,260 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <p>Java 堆从 GC 的角度还可以细分为: 新生代(Eden 区、From Survivor 区和 To Survivor 区)和老年<br>代。</p>
-<a id="more"></a>
+                <h1 id="今日内容"><a href="#今日内容" class="headerlink" title="今日内容"></a>今日内容</h1><pre><code>1. DQL:查询语句
+    1. 排序查询
+    2. 聚合函数
+    3. 分组查询
+    4. 分页查询
 
-<p><img src="//ibm2017.github.io/article/JVM运行时内存/%E6%90%9C%E7%8B%97%E6%88%AA%E5%9B%BE20190922184435.png" alt></p>
-<h1 id="新生代"><a href="#新生代" class="headerlink" title="新生代"></a>新生代</h1><hr>
-<p>是用来存放新生的对象。一般占据堆的 1/3 空间。由于频繁创建对象，所以新生代会频繁触发MinorGC 进行垃圾回收。新生代又分为 Eden 区、ServivorFrom、ServivorTo 三个区。</p>
-<h2 id="Eden-区"><a href="#Eden-区" class="headerlink" title="Eden 区"></a>Eden 区</h2><hr>
-<p>Java 新对象的出生地（如果新创建的对象占用内存很大，则直接分配到老年代）。当 Eden 区内存不够的时候就会触发 MinorGC，对新生代区进行一次垃圾回收。</p>
-<h2 id="ServivorFrom"><a href="#ServivorFrom" class="headerlink" title="ServivorFrom"></a>ServivorFrom</h2><hr>
-<p>上一次 GC 的幸存者，作为这一次 GC 的被扫描者。</p>
-<h2 id="ServivorTo"><a href="#ServivorTo" class="headerlink" title="ServivorTo"></a>ServivorTo</h2><hr>
-<p>保留了一次 MinorGC 过程中的幸存者。</p>
-<h2 id="MinorGC的过程（复制-gt-清空-gt-互换）"><a href="#MinorGC的过程（复制-gt-清空-gt-互换）" class="headerlink" title="MinorGC的过程（复制-&gt;清空-&gt;互换）"></a>MinorGC的过程（复制-&gt;清空-&gt;互换）</h2><hr>
-<p>MinorGC 采用复制算法。</p>
-<h3 id="eden、servicorFrom-复制到-ServicorTo，年龄-1"><a href="#eden、servicorFrom-复制到-ServicorTo，年龄-1" class="headerlink" title="eden、servicorFrom 复制到 ServicorTo，年龄+1"></a>eden、servicorFrom 复制到 ServicorTo，年龄+1</h3><p>首先，把 Eden 和 ServivorFrom 区域中存活的对象复制到 ServicorTo 区域（如果有对象的年龄以及达到了老年的标准，则赋值到老年代区），同时把这些对象的年龄+1（如果 ServicorTo不够位置了就放到老年区）；</p>
-<h3 id="清空-eden、servicorFrom"><a href="#清空-eden、servicorFrom" class="headerlink" title="清空 eden、servicorFrom"></a>清空 eden、servicorFrom</h3><p>然后，清空 Eden 和 ServicorFrom 中的对象；</p>
-<h3 id="ServicorTo-和-ServicorFrom-互换"><a href="#ServicorTo-和-ServicorFrom-互换" class="headerlink" title="ServicorTo 和 ServicorFrom 互换"></a>ServicorTo 和 ServicorFrom 互换</h3><p>最后，ServicorTo 和 ServicorFrom 互换，原 ServicorTo 成为下一次 GC 时的 ServicorFrom区。</p>
-<h1 id="老年代"><a href="#老年代" class="headerlink" title="老年代"></a>老年代</h1><hr>
-<p>主要存放应用程序中生命周期长的内存对象。<br>老年代的对象比较稳定，所以 MajorGC 不会频繁执行。在进行 MajorGC 前一般都先进行了一次 MinorGC，使得有新生代的对象晋身入老年代，导致空间不够用时才触发。当无法找到足够大的连续空间分配给新创建的较大对象时也会提前触发一次 MajorGC 进行垃圾回收腾出空间。<br>MajorGC 采用标记清除算法：首先扫描一次所有老年代，标记出存活的对象，然后回收没有标记的对象。MajorGC 的耗时比较长，因为要扫描再回收。MajorGC 会产生内存碎片，为了减少内存损耗，我们一般需要进行合并或者标记出来方便下次直接分配。当老年代也满了装不下的时候，就会抛出 OOM（Out of Memory）异常。</p>
-<h1 id="永久代"><a href="#永久代" class="headerlink" title="永久代"></a>永久代</h1><hr>
-<p>指内存的永久保存区域，主要存放 Class 和 Meta（元数据）的信息,Class 在被加载的时候被<br>放入永久区域，它和和存放实例的区域不同,GC 不会在主程序运行期对永久区域进行清理。所以这<br>也导致了永久代的区域会随着加载的 Class 的增多而胀满，最终抛出 OOM 异常。</p>
-<h2 id="JAVA8-与元数据"><a href="#JAVA8-与元数据" class="headerlink" title="JAVA8 与元数据"></a>JAVA8 与元数据</h2><hr>
-<p>在 Java8 中，永久代已经被移除，被一个称为“元数据区”（元空间）的区域所取代。元空间<br>的本质和永久代类似，元空间与永久代之间最大的区别在于：元空间并不在虚拟机中，而是使用<br>本地内存。因此，默认情况下，元空间的大小仅受本地内存限制。类的元数据放入 native<br>memory, 字符串池和类的静态变量放入 java 堆中，这样可以加载多少类的元数据就不再由<br>MaxPermSize 控制, 而由系统的实际可用空间来控制。</p>
+2. 约束
+3. 多表之间的关系
+4. 范式
+5. 数据库的备份和还原</code></pre><h1 id="DQL-查询语句"><a href="#DQL-查询语句" class="headerlink" title="DQL:查询语句"></a>DQL:查询语句</h1><pre><code>1. 排序查询
+    * 语法：order by 子句
+        * order by 排序字段1 排序方式1 ，  排序字段2 排序方式2...
 
+    * 排序方式：
+        * ASC：升序，默认的。
+        * DESC：降序。
+
+    * 注意：
+        * 如果有多个排序条件，则当前边的条件值一样时，才会判断第二条件。
+
+
+2. 聚合函数：将一列数据作为一个整体，进行纵向的计算。
+    1. count：计算个数
+        1. 一般选择非空的列：主键
+        2. count(*)
+    2. max：计算最大值
+    3. min：计算最小值
+    4. sum：计算和
+    5. avg：计算平均值
+
+
+    * 注意：聚合函数的计算，排除null值。
+        解决方案：
+            1. 选择不包含非空的列进行计算
+            2. IFNULL函数
+
+3. 分组查询:
+    1. 语法：group by 分组字段；
+    2. 注意：
+        1. 分组之后查询的字段：分组字段、聚合函数
+        2. where 和 having 的区别？
+            1. where 在分组之前进行限定，如果不满足条件，则不参与分组。having在分组之后进行限定，如果不满足结果，则不会被查询出来
+            2. where 后不可以跟聚合函数，having可以进行聚合函数的判断。
+
+        -- 按照性别分组。分别查询男、女同学的平均分
+
+        SELECT sex , AVG(math) FROM student GROUP BY sex;
+
+        -- 按照性别分组。分别查询男、女同学的平均分,人数
+
+        SELECT sex , AVG(math),COUNT(id) FROM student GROUP BY sex;
+
+        --  按照性别分组。分别查询男、女同学的平均分,人数 要求：分数低于70分的人，不参与分组
+        SELECT sex , AVG(math),COUNT(id) FROM student WHERE math &gt; 70 GROUP BY sex;
+
+        --  按照性别分组。分别查询男、女同学的平均分,人数 要求：分数低于70分的人，不参与分组,分组之后。人数要大于2个人
+        SELECT sex , AVG(math),COUNT(id) FROM student WHERE math &gt; 70 GROUP BY sex HAVING COUNT(id) &gt; 2;
+
+        SELECT sex , AVG(math),COUNT(id) 人数 FROM student WHERE math &gt; 70 GROUP BY sex HAVING 人数 &gt; 2;</code></pre><p>​<br>    4. 分页查询<br>        1. 语法：limit 开始的索引,每页查询的条数;<br>        2. 公式：开始的索引 = （当前的页码 - 1） * 每页显示的条数<br>            – 每页显示3条记录 </p>
+<pre><code>    SELECT * FROM student LIMIT 0,3; -- 第1页
+
+    SELECT * FROM student LIMIT 3,3; -- 第2页
+
+    SELECT * FROM student LIMIT 6,3; -- 第3页
+
+3. limit 是一个MySQL&quot;方言&quot;</code></pre><h2 id="约束"><a href="#约束" class="headerlink" title="约束"></a>约束</h2><pre><code>* 概念： 对表中的数据进行限定，保证数据的正确性、有效性和完整性。    
+* 分类：
+    1. 主键约束：primary key
+    2. 非空约束：not null
+    3. 唯一约束：unique
+    4. 外键约束：foreign key
+
+* 非空约束：not null，值不能为null
+    1. 创建表时添加约束
+        CREATE TABLE stu(
+            id INT,
+            NAME VARCHAR(20) NOT NULL -- name为非空
+        );
+    2. 创建表完后，添加非空约束
+        ALTER TABLE stu MODIFY NAME VARCHAR(20) NOT NULL;
+
+    3. 删除name的非空约束
+        ALTER TABLE stu MODIFY NAME VARCHAR(20);</code></pre><p>​<br>    * 唯一约束：unique，值不能重复<br>        1. 创建表时，添加唯一约束<br>            CREATE TABLE stu(<br>                id INT,<br>                phone_number VARCHAR(20) UNIQUE – 添加了唯一约束</p>
+<pre><code>);
+* 注意mysql中，唯一约束限定的列的值可以有多个null</code></pre><p>​<br>        2. 删除唯一约束</p>
+<pre><code>        ALTER TABLE stu DROP INDEX phone_number;
+
+    3. 在创建表后，添加唯一约束
+        ALTER TABLE stu MODIFY phone_number VARCHAR(20) UNIQUE;
+
+* 主键约束：primary key。
+    1. 注意：
+        1. 含义：非空且唯一
+        2. 一张表只能有一个字段为主键
+        3. 主键就是表中记录的唯一标识
+
+    2. 在创建表时，添加主键约束
+        create table stu(
+            id int primary key,-- 给id添加主键约束
+            name varchar(20)
+        );
+
+    3. 删除主键
+        -- 错误 alter table stu modify id int ;
+        ALTER TABLE stu DROP PRIMARY KEY;
+
+    4. 创建完表后，添加主键
+        ALTER TABLE stu MODIFY id INT PRIMARY KEY;
+
+    5. 自动增长：
+        1.  概念：如果某一列是数值类型的，使用 auto_increment 可以来完成值得自动增长
+
+        2. 在创建表时，添加主键约束，并且完成主键自增长
+        create table stu(
+            id int primary key auto_increment,-- 给id添加主键约束
+            name varchar(20)
+        );</code></pre><p>​<br>            3. 删除自动增长<br>            ALTER TABLE stu MODIFY id INT;<br>            4. 添加自动增长<br>            ALTER TABLE stu MODIFY id INT AUTO_INCREMENT;</p>
+<pre><code>* 外键约束：foreign key,让表于表产生关系，从而保证数据的正确性。
+    1. 在创建表时，可以添加外键
+        * 语法：
+            create table 表名(
+                ....
+                外键列
+                constraint 外键名称 foreign key (外键列名称) references 主表名称(主表列名称)
+            );
+
+    2. 删除外键
+        ALTER TABLE 表名 DROP FOREIGN KEY 外键名称;
+
+    3. 创建表之后，添加外键
+        ALTER TABLE 表名 ADD CONSTRAINT 外键名称 FOREIGN KEY (外键字段名称) REFERENCES 主表名称(主表列名称);</code></pre><p>​<br>        4. 级联操作<br>            1. 添加级联操作<br>                语法：ALTER TABLE 表名 ADD CONSTRAINT 外键名称<br>                        FOREIGN KEY (外键字段名称) REFERENCES 主表名称(主表列名称) ON UPDATE CASCADE ON DELETE CASCADE  ;<br>            2. 分类：<br>                1. 级联更新：ON UPDATE CASCADE<br>                2. 级联删除：ON DELETE CASCADE </p>
+<h2 id="数据库的设计"><a href="#数据库的设计" class="headerlink" title="数据库的设计"></a>数据库的设计</h2><pre><code>1. 多表之间的关系
+    1. 分类：
+        1. 一对一(了解)：
+            * 如：人和身份证
+            * 分析：一个人只有一个身份证，一个身份证只能对应一个人
+        2. 一对多(多对一)：
+            * 如：部门和员工
+            * 分析：一个部门有多个员工，一个员工只能对应一个部门
+        3. 多对多：
+            * 如：学生和课程
+            * 分析：一个学生可以选择很多门课程，一个课程也可以被很多学生选择
+    2. 实现关系：
+        1. 一对多(多对一)：
+            * 如：部门和员工
+            * 实现方式：在多的一方建立外键，指向一的一方的主键。
+        2. 多对多：
+            * 如：学生和课程
+            * 实现方式：多对多关系实现需要借助第三张中间表。中间表至少包含两个字段，这两个字段作为第三张表的外键，分别指向两张表的主键
+        3. 一对一(了解)：
+            * 如：人和身份证
+            * 实现方式：一对一关系实现，可以在任意一方添加唯一外键指向另一方的主键。
+
+    3. 案例
+        -- 创建旅游线路分类表 tab_category
+        -- cid 旅游线路分类主键，自动增长
+        -- cname 旅游线路分类名称非空，唯一，字符串 100
+        CREATE TABLE tab_category (
+            cid INT PRIMARY KEY AUTO_INCREMENT,
+            cname VARCHAR(100) NOT NULL UNIQUE
+        );
+
+        -- 创建旅游线路表 tab_route
+        /*
+        rid 旅游线路主键，自动增长
+        rname 旅游线路名称非空，唯一，字符串 100
+        price 价格
+        rdate 上架时间，日期类型
+        cid 外键，所属分类
+        */
+        CREATE TABLE tab_route(
+            rid INT PRIMARY KEY AUTO_INCREMENT,
+            rname VARCHAR(100) NOT NULL UNIQUE,
+            price DOUBLE,
+            rdate DATE,
+            cid INT,
+            FOREIGN KEY (cid) REFERENCES tab_category(cid)
+        );
+
+        /*创建用户表 tab_user
+        uid 用户主键，自增长
+        username 用户名长度 100，唯一，非空
+        password 密码长度 30，非空
+        name 真实姓名长度 100
+        birthday 生日
+        sex 性别，定长字符串 1
+        telephone 手机号，字符串 11
+        email 邮箱，字符串长度 100
+        */
+        CREATE TABLE tab_user (
+            uid INT PRIMARY KEY AUTO_INCREMENT,
+            username VARCHAR(100) UNIQUE NOT NULL,
+            PASSWORD VARCHAR(30) NOT NULL,
+            NAME VARCHAR(100),
+            birthday DATE,
+            sex CHAR(1) DEFAULT &apos;男&apos;,
+            telephone VARCHAR(11),
+            email VARCHAR(100)
+        );
+
+        /*
+        创建收藏表 tab_favorite
+        rid 旅游线路 id，外键
+        date 收藏时间
+        uid 用户 id，外键
+        rid 和 uid 不能重复，设置复合主键，同一个用户不能收藏同一个线路两次
+        */
+        CREATE TABLE tab_favorite (
+            rid INT, -- 线路id
+            DATE DATETIME,
+            uid INT, -- 用户id
+            -- 创建复合主键
+            PRIMARY KEY(rid,uid), -- 联合主键
+            FOREIGN KEY (rid) REFERENCES tab_route(rid),
+            FOREIGN KEY(uid) REFERENCES tab_user(uid)
+        );</code></pre><p>​<br>    2. 数据库设计的范式<br>        * 概念：设计数据库时，需要遵循的一些规范。要遵循后边的范式要求，必须先遵循前边的所有范式要求</p>
+<pre><code>    设计关系数据库时，遵从不同的规范要求，设计出合理的关系型数据库，这些不同的规范要求被称为不同的范式，各种范式呈递次规范，越高的范式数据库冗余越小。
+    目前关系数据库有六种范式：第一范式（1NF）、第二范式（2NF）、第三范式（3NF）、巴斯-科德范式（BCNF）、第四范式(4NF）和第五范式（5NF，又称完美范式）。
+
+* 分类：
+    1. 第一范式（1NF）：每一列都是不可分割的原子数据项
+    2. 第二范式（2NF）：在1NF的基础上，非码属性必须完全依赖于码（在1NF基础上消除非主属性对主码的部分函数依赖）
+        * 几个概念：
+            1. 函数依赖：A--&gt;B,如果通过A属性(属性组)的值，可以确定唯一B属性的值。则称B依赖于A
+                例如：学号--&gt;姓名。  （学号，课程名称） --&gt; 分数
+            2. 完全函数依赖：A--&gt;B， 如果A是一个属性组，则B属性值得确定需要依赖于A属性组中所有的属性值。
+                例如：（学号，课程名称） --&gt; 分数
+            3. 部分函数依赖：A--&gt;B， 如果A是一个属性组，则B属性值得确定只需要依赖于A属性组中某一些值即可。
+                例如：（学号，课程名称） -- &gt; 姓名
+            4. 传递函数依赖：A--&gt;B, B -- &gt;C . 如果通过A属性(属性组)的值，可以确定唯一B属性的值，在通过B属性（属性组）的值可以确定唯一C属性的值，则称 C 传递函数依赖于A
+                例如：学号--&gt;系名，系名--&gt;系主任
+            5. 码：如果在一张表中，一个属性或属性组，被其他所有属性所完全依赖，则称这个属性(属性组)为该表的码
+                例如：该表中码为：（学号，课程名称）
+                * 主属性：码属性组中的所有属性
+                * 非主属性：除过码属性组的属性
+
+    3. 第三范式（3NF）：在2NF基础上，任何非主属性不依赖于其它非主属性（在2NF基础上消除传递依赖）</code></pre><h2 id="数据库的备份和还原"><a href="#数据库的备份和还原" class="headerlink" title="数据库的备份和还原"></a>数据库的备份和还原</h2><pre><code>1. 命令行：
+    * 语法：
+        * 备份： mysqldump -u用户名 -p密码 数据库名称 &gt; 保存的路径
+        * 还原：
+            1. 登录数据库
+            2. 创建数据库
+            3. 使用数据库
+            4. 执行文件。source 文件路径
+2. 图形化工具：</code></pre>
                 
 
                 <hr>
                 <!-- Pager -->
                 <ul class="pager">
                     
-                        <li class="previous">
-                            <a href="/article/JVM垃圾回收与算法/" data-toggle="tooltip" data-placement="top" title="JVM垃圾回收与算法">&larr; Previous Post</a>
-                        </li>
-                    
                     
                         <li class="next">
-                            <a href="/article/JVM基础概念/" data-toggle="tooltip" data-placement="top" title="JVM基础概念">Next Post &rarr;</a>
+                            <a href="/article/MySQL基础课堂笔记/" data-toggle="tooltip" data-placement="top" title="MySQL基础课堂笔记">Next Post &rarr;</a>
                         </li>
                     
                 </ul>
@@ -298,7 +515,7 @@
         <div id="toc" class="toc-article">
         <strong class="toc-title">Contents</strong>
         
-          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#新生代"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">新生代</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Eden-区"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">Eden 区</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#ServivorFrom"><span class="toc-nav-number">1.2.</span> <span class="toc-nav-text">ServivorFrom</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#ServivorTo"><span class="toc-nav-number">1.3.</span> <span class="toc-nav-text">ServivorTo</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#MinorGC的过程（复制-gt-清空-gt-互换）"><span class="toc-nav-number">1.4.</span> <span class="toc-nav-text">MinorGC的过程（复制-&gt;清空-&gt;互换）</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#eden、servicorFrom-复制到-ServicorTo，年龄-1"><span class="toc-nav-number">1.4.1.</span> <span class="toc-nav-text">eden、servicorFrom 复制到 ServicorTo，年龄+1</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#清空-eden、servicorFrom"><span class="toc-nav-number">1.4.2.</span> <span class="toc-nav-text">清空 eden、servicorFrom</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#ServicorTo-和-ServicorFrom-互换"><span class="toc-nav-number">1.4.3.</span> <span class="toc-nav-text">ServicorTo 和 ServicorFrom 互换</span></a></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#老年代"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">老年代</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#永久代"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">永久代</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#JAVA8-与元数据"><span class="toc-nav-number">3.1.</span> <span class="toc-nav-text">JAVA8 与元数据</span></a></li></ol></li></ol>
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#今日内容"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">今日内容</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#DQL-查询语句"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">DQL:查询语句</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#约束"><span class="toc-nav-number">2.1.</span> <span class="toc-nav-text">约束</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#数据库的设计"><span class="toc-nav-number">2.2.</span> <span class="toc-nav-text">数据库的设计</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#数据库的备份和还原"><span class="toc-nav-number">2.3.</span> <span class="toc-nav-text">数据库的备份和还原</span></a></li></ol></li></ol>
         
         </div>
       </aside>
@@ -318,7 +535,7 @@
                     <h5><a href="/tags/">FEATURED TAGS</a></h5>
                     <div class="tags">
                        
-                          <a class="tag" href="/tags/#JVM" title="JVM">JVM</a>
+                          <a class="tag" href="/tags/#MySQL" title="MySQL">MySQL</a>
                         
                     </div>
                 </section>
