@@ -14,11 +14,11 @@
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <title>
         
-          Java基础加强笔记 - 韦天魔术棒 | Blog
+          JavaScript - 韦天魔术棒 | Blog
         
     </title>
 
-    <link rel="canonical" href="https://ibm2017.github.io/article/Java基础加强笔记/">
+    <link rel="canonical" href="https://ibm2017.github.io/article/JavaScript基础笔记/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -88,14 +88,14 @@
                     <div class="post-heading">
                         <div class="tags">
                             
-                              <a class="tag" href="/tags/#Java" title="Java">Java</a>
+                              <a class="tag" href="/tags/#JavaScript" title="JavaScript">JavaScript</a>
                             
                         </div>
-                        <h1>Java基础加强笔记</h1>
-                        <h2 class="subheading">基于JAVA中Junit单元测试、反射、注解的笔记</h2>
+                        <h1>JavaScript</h1>
+                        <h2 class="subheading">JavaScript基础</h2>
                         <span class="meta">
                             Posted by 韦天魔术棒 on
-                            2019-10-02
+                            2019-10-05
                         </span>
                     </div>
                 
@@ -212,193 +212,252 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <h1 id="今日内容"><a href="#今日内容" class="headerlink" title="今日内容"></a>今日内容</h1><pre><code>1. Junit单元测试
-2. 反射
-3. 注解</code></pre><h2 id="Junit单元测试："><a href="#Junit单元测试：" class="headerlink" title="Junit单元测试："></a>Junit单元测试：</h2><pre><code>* 测试分类：
-    1. 黑盒测试：不需要写代码，给输入值，看程序是否能够输出期望的值。
-    2. 白盒测试：需要写代码的。关注程序具体的执行流程。
+                <h1 id="今日内容"><a href="#今日内容" class="headerlink" title="今日内容"></a>今日内容</h1><pre><code>1. JavaScript基础</code></pre><h2 id="JavaScript："><a href="#JavaScript：" class="headerlink" title="JavaScript："></a>JavaScript：</h2><pre><code>* 概念：    一门客户端脚本语言
+    * 运行在客户端浏览器中的。每一个浏览器都有JavaScript的解析引擎
+    * 脚本语言：不需要编译，直接就可以被浏览器解析执行了
 
-* Junit使用：白盒测试
-    * 步骤：
-        1. 定义一个测试类(测试用例)
-            * 建议：
-                * 测试类名：被测试的类名Test        CalculatorTest
-                * 包名：xxx.xxx.xx.test        cn.itcast.test
+* 功能：
+    * 可以来增强用户和html页面的交互过程，可以来控制html元素，让页面有一些动态的效果，增强用户的体验。
 
-        2. 定义测试方法：可以独立运行
-            * 建议：
-                * 方法名：test测试的方法名        testAdd()  
-                * 返回值：void
-                * 参数列表：空参
+* JavaScript发展史：
+    1. 1992年，Nombase公司，开发出第一门客户端脚本语言，专门用于表单的校验。命名为 ： C--    ，后来更名为：ScriptEase
+    2. 1995年，Netscape(网景)公司，开发了一门客户端脚本语言：LiveScript。后来，请来SUN公司的专家，修改LiveScript，命名为JavaScript
+    3. 1996年，微软抄袭JavaScript开发出JScript语言
+    4. 1997年，ECMA(欧洲计算机制造商协会)，制定出客户端脚本语言的标准：ECMAScript，就是统一了所有客户端脚本语言的编码方式。
 
-        3. 给方法加@Test
-        4. 导入junit依赖环境
+    * JavaScript = ECMAScript + JavaScript自己特有的东西(BOM+DOM)
 
-    * 判定结果：
-        * 红色：失败
-        * 绿色：成功
-        * 一般我们会使用断言操作来处理结果
-            * Assert.assertEquals(期望的结果,运算的结果);
+* ECMAScript：客户端脚本语言的标准
+    1. 基本语法：
+        1. 与html结合方式
+            1. 内部JS：
+                * 定义&lt;script&gt;，标签体内容就是js代码
+            2. 外部JS：
+                * 定义&lt;script&gt;，通过src属性引入外部的js文件
 
-    * 补充：
-        * @Before:
-            * 修饰的方法会在测试方法之前被自动执行
-        * @After:
-            * 修饰的方法会在测试方法执行之后自动被执行</code></pre><h2 id="反射：框架设计的灵魂"><a href="#反射：框架设计的灵魂" class="headerlink" title="反射：框架设计的灵魂"></a>反射：框架设计的灵魂</h2><pre><code>* 框架：半成品软件。可以在框架的基础上进行软件开发，简化编码
-* 反射：将类的各个组成部分封装为其他对象，这就是反射机制
-    * 好处：
-        1. 可以在程序运行过程中，操作这些对象。
-        2. 可以解耦，提高程序的可扩展性。
+            * 注意：
+                1. &lt;script&gt;可以定义在html页面的任何地方。但是定义的位置会影响执行顺序。
+                2. &lt;script&gt;可以定义多个。
+        2. 注释
+            1. 单行注释：//注释内容
+            2. 多行注释：/*注释内容*/
+        3. 数据类型：
+            1. 原始数据类型(基本数据类型)：
+                1. number：数字。 整数/小数/NaN(not a number 一个不是数字的数字类型)
+                2. string：字符串。 字符串  &quot;abc&quot; &quot;a&quot; &apos;abc&apos;
+                3. boolean: true和false
+                4. null：一个对象为空的占位符
+                5. undefined：未定义。如果一个变量没有给初始化值，则会被默认赋值为undefined
 
+            2. 引用数据类型：对象
 
-* 获取Class对象的方式：
-    1. Class.forName(&quot;全类名&quot;)：将字节码文件加载进内存，返回Class对象
-        * 多用于配置文件，将类名定义在配置文件中。读取文件，加载类
-    2. 类名.class：通过类名的属性class获取
-        * 多用于参数的传递
-    3. 对象.getClass()：getClass()方法在Object类中定义着。
-        * 多用于对象的获取字节码的方式
+        4. 变量
+            * 变量：一小块存储数据的内存空间
+            * Java语言是强类型语言，而JavaScript是弱类型语言。
+                * 强类型：在开辟变量存储空间时，定义了空间将来存储的数据的数据类型。只能存储固定类型的数据
+                * 弱类型：在开辟变量存储空间时，不定义空间将来的存储数据类型，可以存放任意类型的数据。
+            * 语法：
+                * var 变量名 = 初始化值;
 
-    * 结论：
-        同一个字节码文件(*.class)在一次程序运行过程中，只会被加载一次，不论通过哪一种方式获取的Class对象都是同一个。
+            * typeof运算符：获取变量的类型。
+                * 注：null运算后得到的是object
+        5. 运算符
+            1. 一元运算符：只有一个运算数的运算符
+                ++，-- ， +(正号)  
+                * ++ --: 自增(自减)
+                    * ++(--) 在前，先自增(自减)，再运算
+                    * ++(--) 在后，先运算，再自增(自减)
+                * +(-)：正负号
+                * 注意：在JS中，如果运算数不是运算符所要求的类型，那么js引擎会自动的将运算数进行类型转换
+                    * 其他类型转number：
+                        * string转number：按照字面值转换。如果字面值不是数字，则转为NaN（不是数字的数字）
+                        * boolean转number：true转为1，false转为0
+            2. 算数运算符
+                + - * / % ...
 
+            3. 赋值运算符
+                = += -+....
 
-* Class对象功能：
-    * 获取功能：
-        1. 获取成员变量们
-            * Field[] getFields() ：获取所有public修饰的成员变量
-            * Field getField(String name)   获取指定名称的 public修饰的成员变量
-
-            * Field[] getDeclaredFields()  获取所有的成员变量，不考虑修饰符
-            * Field getDeclaredField(String name)  
-        2. 获取构造方法们
-            * Constructor&lt;?&gt;[] getConstructors()  
-            * Constructor&lt;T&gt; getConstructor(类&lt;?&gt;... parameterTypes)  
-
-            * Constructor&lt;T&gt; getDeclaredConstructor(类&lt;?&gt;... parameterTypes)  
-            * Constructor&lt;?&gt;[] getDeclaredConstructors()  
-        3. 获取成员方法们：
-            * Method[] getMethods()  
-            * Method getMethod(String name, 类&lt;?&gt;... parameterTypes)  
-
-            * Method[] getDeclaredMethods()  
-            * Method getDeclaredMethod(String name, 类&lt;?&gt;... parameterTypes)  
-
-        4. 获取全类名    
-            * String getName()  
-
-
-* Field：成员变量
-    * 操作：
-        1. 设置值
-            * void set(Object obj, Object value)  
-        2. 获取值
-            * get(Object obj) 
-
-        3. 忽略访问权限修饰符的安全检查
-            * setAccessible(true):暴力反射
+            4. 比较运算符
+                &gt; &lt; &gt;= &lt;= == ===(全等于)
+                * 比较方式
+                  1. 类型相同：直接比较
+                      * 字符串：按照字典顺序比较。按位逐一比较，直到得出大小为止。
+                  2. 类型不同：先进行类型转换，再比较
+                      * ===：全等于。在比较之前，先判断类型，如果类型不一样，则直接返回false
 
 
+            5. 逻辑运算符
+                &amp;&amp; || !
+                * 其他类型转boolean：
+                   1. number：0或NaN为假，其他为真
+                   2. string：除了空字符串(&quot;&quot;)，其他都是true
+                   3. null&amp;undefined:都是false
+                   4. 对象：所有对象都为true
 
-* Constructor:构造方法
-    * 创建对象：
-        * T newInstance(Object... initargs)  
+            6. 三元运算符
+                ? : 表达式
+                var a = 3;
+                var b = 4;
 
-        * 如果使用空参数构造方法创建对象，操作可以简化：Class对象的newInstance方法
+                var c = a &gt; b ? 1:0;
+                * 语法：
+                    * 表达式? 值1:值2;
+                    * 判断表达式的值，如果是true则取值1，如果是false则取值2；
 
+        6. 流程控制语句：
+            1. if...else...
+            2. switch:
+                * 在java中，switch语句可以接受的数据类型： byte int shor char,枚举(1.5) ,String(1.7)
+                    * switch(变量):
+                        case 值:
+                * 在JS中,switch语句可以接受任意的原始数据类型
+            3. while
+            4. do...while
+            5. for
+        7. JS特殊语法：
+            1. 语句以;结尾，如果一行只有一条语句则 ;可以省略 (不建议)
+            2. 变量的定义使用var关键字，也可以不使用
+                * 用： 定义的变量是局部变量
+                * 不用：定义的变量是全局变量(不建议)
 
-* Method：方法对象
-    * 执行方法：
-        * Object invoke(Object obj, Object... args)  
-
-    * 获取方法名称：
-        * String getName:获取方法名
-
-
-* 案例：
-    * 需求：写一个&quot;框架&quot;，不能改变该类的任何代码的前提下，可以帮我们创建任意类的对象，并且执行其中任意方法
-        * 实现：
-            1. 配置文件
-            2. 反射
-        * 步骤：
-            1. 将需要创建的对象的全类名和需要执行的方法定义在配置文件中
-            2. 在程序中加载读取配置文件
-            3. 使用反射技术来加载类文件进内存
-            4. 创建对象
-            5. 执行方法</code></pre><h2 id="注解："><a href="#注解：" class="headerlink" title="注解："></a>注解：</h2><pre><code>* 概念：说明程序的。给计算机看的
-* 注释：用文字描述程序的。给程序员看的
-
-* 定义：注解（Annotation），也叫元数据。一种代码级别的说明。它是JDK1.5及以后版本引入的一个特性，与类、接口、枚举是在同一个层次。它可以声明在包、类、字段、方法、局部变量、方法参数等的前面，用来对这些元素进行说明，注释。
-* 概念描述：
-    * JDK1.5之后的新特性
-    * 说明程序的
-    * 使用注解：@注解名称</code></pre><p>​<br>​    * 作用分类：<br>​        ①编写文档：通过代码里标识的注解生成文档【生成文档doc文档】<br>​        ②代码分析：通过代码里标识的注解对代码进行分析【使用反射】<br>​        ③编译检查：通过代码里标识的注解让编译器能够实现基本的编译检查【Override】</p>
-<pre><code>* JDK中预定义的一些注解
-    * @Override    ：检测被该注解标注的方法是否是继承自父类(接口)的
-    * @Deprecated：该注解标注的内容，表示已过时
-    * @SuppressWarnings：压制警告
-        * 一般传递参数all  @SuppressWarnings(&quot;all&quot;)
-
-* 自定义注解
-    * 格式：
-        元注解
-        public @interface 注解名称{
-            属性列表;
-        }
-
-    * 本质：注解本质上就是一个接口，该接口默认继承Annotation接口
-        * public interface MyAnno extends java.lang.annotation.Annotation {}
-
-    * 属性：接口中的抽象方法
-        * 要求：
-            1. 属性的返回值类型有下列取值
-                * 基本数据类型
-                * String
-                * 枚举
-                * 注解
-                * 以上类型的数组
-
-            2. 定义了属性，在使用时需要给属性赋值
-                1. 如果定义属性时，使用default关键字给属性默认初始化值，则使用注解时，可以不进行属性的赋值。
-                2. 如果只有一个属性需要赋值，并且属性的名称是value，则value可以省略，直接定义值即可。
-                3. 数组赋值时，值使用{}包裹。如果数组中只有一个值，则{}可以省略
-
-    * 元注解：用于描述注解的注解
-        * @Target：描述注解能够作用的位置
-            * ElementType取值：
-                * TYPE：可以作用于类上
-                * METHOD：可以作用于方法上
-                * FIELD：可以作用于成员变量上
-        * @Retention：描述注解被保留的阶段
-            * @Retention(RetentionPolicy.RUNTIME)：当前被描述的注解，会保留到class字节码文件中，并被JVM读取到
-        * @Documented：描述注解是否被抽取到api文档中
-        * @Inherited：描述注解是否被子类继承
-
-
-* 在程序使用(解析)注解：获取注解中定义的属性值
-    1. 获取注解定义的位置的对象  （Class，Method,Field）
-    2. 获取指定的注解
-        * getAnnotation(Class)
-        //其实就是在内存中生成了一个该注解接口的子类实现对象
-
-                public class ProImpl implements Pro{
-                    public String className(){
-                        return &quot;cn.itcast.annotation.Demo1&quot;;
-                    }
-                    public String methodName(){
-                        return &quot;show&quot;;
-                    }
+        8. 练习：99乘法表
+        &lt;!DOCTYPE html&gt;
+        &lt;html lang=&quot;en&quot;&gt;
+        &lt;head&gt;
+            &lt;meta charset=&quot;UTF-8&quot;&gt;
+            &lt;title&gt;99乘法表&lt;/title&gt;
+            &lt;style&gt;
+                td{
+                    border: 1px solid;
                 }
-    3. 调用注解中的抽象方法获取配置的属性值
 
+            &lt;/style&gt;
 
-* 案例：简单的测试框架
-* 小结：
-    1. 以后大多数时候，我们会使用注解，而不是自定义注解
-    2. 注解给谁用？
-        1. 编译器
-        2. 给解析程序用
-    3. 注解不是程序的一部分，可以理解为注解就是一个标签</code></pre>
+            &lt;script&gt;
+
+                document.write(&quot;&lt;table  align=&apos;center&apos;&gt;&quot;);</code></pre><p>​<br>                    //1.完成基本的for循环嵌套，展示乘法表<br>                    for (var i = 1; i &lt;= 9 ; i++) {<br>                        document.write(“<tr>“);<br>                        for (var j = 1; j &lt;=i ; j++) {<br>                            document.write(“<td>“);</td></tr></p>
+<pre><code>                    //输出  1 * 1 = 1
+                    document.write(i + &quot; * &quot; + j + &quot; = &quot; + ( i*j) +&quot;&amp;nbsp;&amp;nbsp;&amp;nbsp;&quot;);
+
+                    document.write(&quot;&lt;/td&gt;&quot;);
+                }
+                /*//输出换行
+                document.write(&quot;&lt;br&gt;&quot;);*/
+
+                document.write(&quot;&lt;/tr&gt;&quot;);
+            }
+
+            //2.完成表格嵌套
+            document.write(&quot;&lt;/table&gt;&quot;);
+
+        &lt;/script&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+
+    &lt;/body&gt;
+    &lt;/html&gt;
+
+2. 基本对象：
+    1. Function：函数(方法)对象
+        1. 创建：
+            1. var fun = new Function(形式参数列表,方法体);  //忘掉吧
+            2. 
+                function 方法名称(形式参数列表){
+                    方法体
+                }
+
+            3. 
+               var 方法名 = function(形式参数列表){
+                    方法体
+               }
+        2. 方法：
+
+        3. 属性：
+            length:代表形参的个数
+        4. 特点：
+            1. 方法定义是，形参的类型不用写,返回值类型也不写。
+            2. 方法是一个对象，如果定义名称相同的方法，会覆盖
+            3. 在JS中，方法的调用只与方法的名称有关，和参数列表无关
+            4. 在方法声明中有一个隐藏的内置对象（数组），arguments,封装所有的实际参数
+        5. 调用：
+            方法名称(实际参数列表);
+
+    2. Array:数组对象
+        1. 创建：
+            1. var arr = new Array(元素列表);
+            2. var arr = new Array(默认长度);
+            3. var arr = [元素列表];
+        2. 方法
+            join(参数):将数组中的元素按照指定的分隔符拼接为字符串
+            push()    向数组的末尾添加一个或更多元素，并返回新的长度。
+        3. 属性
+            length:数组的长度
+        4. 特点：
+            1. JS中，数组元素的类型可变的。
+            2. JS中，数组长度可变的。
+    3. Boolean
+    4. Date：日期对象
+        1. 创建：
+            var date = new Date();
+
+        2. 方法：
+            toLocaleString()：返回当前date对象对应的时间本地字符串格式
+            getTime():获取毫秒值。返回当前如期对象描述的时间到1970年1月1日零点的毫秒值差
+    5. Math：数学对象
+        1. 创建：
+            * 特点：Math对象不用创建，直接使用。  Math.方法名();
+
+        2. 方法：
+            random():返回 0 ~ 1 之间的随机数。 含0不含1
+            ceil(x)：对数进行上舍入。
+            floor(x)：对数进行下舍入。
+            round(x)：把数四舍五入为最接近的整数。
+        3. 属性：
+            PI
+    6. Number
+    7. String
+    8. RegExp：正则表达式对象
+        1. 正则表达式：定义字符串的组成规则。
+            1. 单个字符:[]
+                如： [a] [ab] [a-zA-Z0-9_]
+                * 特殊符号代表特殊含义的单个字符:
+                    \d:单个数字字符 [0-9]
+                    \w:单个单词字符[a-zA-Z0-9_]
+            2. 量词符号：
+                ?：表示出现0次或1次
+                *：表示出现0次或多次
+                +：出现1次或多次
+                {m,n}:表示 m&lt;= 数量 &lt;= n
+                    * m如果缺省： {,n}:最多n次
+                    * n如果缺省：{m,} 最少m次
+            3. 开始结束符号
+                * ^:开始
+                * $:结束
+        2. 正则对象：
+            1. 创建
+                1. var reg = new RegExp(&quot;正则表达式&quot;);
+                2. var reg = /正则表达式/;
+            2. 方法    
+                1. test(参数):验证指定的字符串是否符合正则定义的规范    
+    9. Global
+        1. 特点：全局对象，这个Global中封装的方法不需要对象就可以直接调用。  方法名();
+        2. 方法：
+            encodeURI():url编码
+            decodeURI():url解码
+
+            encodeURIComponent():url编码,编码的字符更多
+            decodeURIComponent():url解码
+
+            parseInt():将字符串转为数字
+                * 逐一判断每一个字符是否是数字，直到不是数字为止，将前边数字部分转为number
+            isNaN():判断一个值是否是NaN
+                * NaN六亲不认，连自己都不认。NaN参与的==比较全部问false
+
+            eval():讲 JavaScript 字符串，并把它作为脚本代码来执行。
+        3. URL编码
+           传智播客 =  %E4%BC%A0%E6%99%BA%E6%92%AD%E5%AE%A2</code></pre><p>​    </p>
+
                 
 
                 <hr>
@@ -406,12 +465,12 @@
                 <ul class="pager">
                     
                         <li class="previous">
-                            <a href="/article/JavaScript基础笔记/" data-toggle="tooltip" data-placement="top" title="JavaScript">&larr; Previous Post</a>
+                            <a href="/article/JavaScript高级笔记/" data-toggle="tooltip" data-placement="top" title="JavaScript高级笔记">&larr; Previous Post</a>
                         </li>
                     
                     
                         <li class="next">
-                            <a href="/article/MySQL约束课堂笔记/" data-toggle="tooltip" data-placement="top" title="MySQL约束课堂笔记">Next Post &rarr;</a>
+                            <a href="/article/Java基础加强笔记/" data-toggle="tooltip" data-placement="top" title="Java基础加强笔记">Next Post &rarr;</a>
                         </li>
                     
                 </ul>
@@ -461,7 +520,7 @@
         <div id="toc" class="toc-article">
         <strong class="toc-title">Contents</strong>
         
-          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#今日内容"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">今日内容</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Junit单元测试："><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">Junit单元测试：</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#反射：框架设计的灵魂"><span class="toc-nav-number">1.2.</span> <span class="toc-nav-text">反射：框架设计的灵魂</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#注解："><span class="toc-nav-number">1.3.</span> <span class="toc-nav-text">注解：</span></a></li></ol></li></ol>
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#今日内容"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">今日内容</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#JavaScript："><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">JavaScript：</span></a></li></ol></li></ol>
         
         </div>
       </aside>
@@ -481,7 +540,7 @@
                     <h5><a href="/tags/">FEATURED TAGS</a></h5>
                     <div class="tags">
                        
-                          <a class="tag" href="/tags/#Java" title="Java">Java</a>
+                          <a class="tag" href="/tags/#JavaScript" title="JavaScript">JavaScript</a>
                         
                     </div>
                 </section>
